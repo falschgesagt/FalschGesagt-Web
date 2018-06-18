@@ -1,0 +1,39 @@
+body {
+	background: #08B2E3;
+	color: white;
+}
+
+div {
+	text-align: center;
+}
+
+#text {
+	margin-top: 250px;
+	font-family: 'Avenir Next Condensed';
+	font-size: 2em;
+	font-weight: 600;
+}
+
+#author {
+	margin-top: 30px;
+	font-family: 'Helvetica Neue';
+	font-size: 1.5em;
+}
+
+button {
+	margin-top: 100px;
+	font-family: 'DIN Alternate';
+	border-radius: 10px;
+	background: #2ADE81;
+	color: #097A40;
+	outline: none;
+	border: none;
+	width: 300px;
+	height: 100px;
+	font-size: 1.7em;
+}
+
+button:hover {
+	color: #06592F;
+	cursor: pointer;
+}
