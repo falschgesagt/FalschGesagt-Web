@@ -1,5 +1,7 @@
 const URL = "https://api.falschgesagt.de";
-var quotes = [];
+var data = {
+
+};
 
 /*[
 	{
@@ -36,13 +38,16 @@ function getRandomInt(min, max) {
 }
 
 function showRandomQuote() {
-	const textLabel = document.querySelector('#text span');
-	const authorLabel = document.querySelector('#author');
+	if (data != null) {
+		const textLabel = document.querySelector('#text span');
+		const authorLabel = document.querySelector('#author');
 
-	const random = getRandomInt(0, quotes.length - 1);
+		const randomQuote = getRandomInt(0, data.quotes.length - 1);
+		const randomAuthor = getRandomInt(0, data.authors.length - 1);
 
-	textLabel.innerHTML = quotes[random].text;
-	authorLabel.innerHTML = quotes[random].author;
+		textLabel.innerHTML = data.quotes[randomQuote];
+		authorLabel.innerHTML = data.authors[randomAuthor];
+	}
 }
 
 
@@ -54,7 +59,7 @@ function fetchQuotes() {
 	var request = new XMLHttpRequest();
 	request.onreadystatechange = function() {
 	    if (this.readyState == 4 && this.status == 200) {
-	    	quotes = JSON.parse(request.responseText);
+	    	data = JSON.parse(request.responseText);
 	    	showRandomQuote();
 	    } else {
 	    	console.warn("Could not fetch quotes");
