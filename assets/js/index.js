@@ -3,21 +3,6 @@ var data = {
 
 };
 
-/*[
-	{
-		text: '"Vom Feeling her hatte ich ein gutes Gefühl."',
-		author: 'Karl Marx'
-	},
-	{
-		text: '"Hier spielt die Musik!"',
-		author: 'Ludwig van Beethoven'
-	},
-	{
-		text: '"Ich bin Optimist. Sogar meine Blutgruppe ist positiv."',
-		author: 'Napoleon Bonaparte'
-	}
-]*/
-
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -57,7 +42,7 @@ function showRandomQuote() {
 
 function fetchQuotes() {
 	var request = new XMLHttpRequest();
-	request.onreadystatechange = function() {
+	request.onload = function() {
 	    if (this.readyState == 4 && this.status == 200) {
 	    	data = JSON.parse(request.responseText);
 	    	showRandomQuote();
