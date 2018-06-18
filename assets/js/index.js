@@ -17,19 +17,14 @@ var quotes = [];
 ]*/
 
 
-fetchQuotes();
-
 
 document.addEventListener("DOMContentLoaded", function() {
 	const quoteButton = document.querySelector('button');
-	const textLabel = document.querySelector('#text span');
-	const authorLabel = document.querySelector('#author');
+	
+	fetchQuotes();
 
 	quoteButton.onclick = function() {
-		const random = getRandomInt(0, quotes.length - 1);
-
-		textLabel.innerHTML = quotes[random].text;
-		authorLabel.innerHTML = quotes[random].author;
+		showRandomQuote();
 	}
 
 });
@@ -40,6 +35,15 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function showRandomQuote() {
+	const textLabel = document.querySelector('#text span');
+	const authorLabel = document.querySelector('#author');
+
+	const random = getRandomInt(0, quotes.length - 1);
+
+	textLabel.innerHTML = quotes[random].text;
+	authorLabel.innerHTML = quotes[random].author;
+}
 
 
 /*
@@ -51,6 +55,9 @@ function fetchQuotes() {
 	request.onreadystatechange = function() {
 	    if (this.readyState == 4 && this.status == 200) {
 	    	quotes = JSON.parse(request.responseText);
+	    	showRandomQuote();
+	    } else {
+	    	console.warn("Could not fetch quotes");
 	    }
 	};
 	request.open("GET", URL, true);
