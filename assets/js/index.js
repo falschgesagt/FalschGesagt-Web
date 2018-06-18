@@ -1,4 +1,7 @@
-const quotes = [
+const URL = "https://api.falschgesagt.de";
+var quotes = [];
+
+/*[
 	{
 		text: '"Vom Feeling her hatte ich ein gutes Gefühl."',
 		author: 'Karl Marx'
@@ -11,31 +14,47 @@ const quotes = [
 		text: '"Ich bin Optimist. Sogar meine Blutgruppe ist positiv."',
 		author: 'Napoleon Bonaparte'
 	}
-]
-
-var currentIndex = 0;
+]*/
 
 
+fetchQuotes();
 
 
 document.addEventListener("DOMContentLoaded", function() {
 	const quoteButton = document.querySelector('button');
-	const textLabel = document.querySelector('#text');
+	const textLabel = document.querySelector('#text span');
 	const authorLabel = document.querySelector('#author');
 
 	quoteButton.onclick = function() {
-		if (currentIndex >= quotes.length - 1) {
-			currentIndex = 0;
-		} else {
-			currentIndex++;
-		}
+		const random = getRandomInt(0, quotes.length - 1);
 
-		textLabel.innerHTML = quotes[currentIndex].text;
-		authorLabel.innerHTML = quotes[currentIndex].author;
+		textLabel.innerHTML = quotes[random].text;
+		authorLabel.innerHTML = quotes[random].author;
 	}
 
 });
 
 
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+
+/*
+	BACKEND ------------------------------------------------------------------------
+*/
+
+function fetchQuotes() {
+	var request = new XMLHttpRequest();
+	request.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	    	quotes = JSON.parse(request.responseText);
+	    }
+	};
+	request.open("GET", URL, true);
+	request.send();
+}
 
 
